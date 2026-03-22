@@ -949,3 +949,43 @@ bbox 文件虽然位于某个 clip 目录中，但其内容可能覆盖当前 `s
 以避免后续解码出错。
 
 ---
+
+---
+
+# 15. 转换为 ReID 项目训练集
+
+仓库新增了 `tools/prepare_crtrack_reid.py`，用于把 `CRTrack_In-domain_gt` 转成当前训练代码可直接读取的 `CRTrack-ReID` 目录结构。
+
+核心约束如下：
+
+1. **身份标签只从 `ids_with_text_cross_view_selected` 读取**，不会回退到其他标签目录。
+2. 每个 `(scene, clip, csv中的id)` 会被重新映射为一个全局 `pid`，从而适配 `CRTrack-ReID/train/*.jpg` 的命名规则。
+3. 每个视角的 `camid` 固定映射为：`View1 -> c1`、`View2 -> c2`、`View3 -> c3`。
+4. 脚本会遍历所有已发现的 `scene/clip/view` 目录，因此虽然仓库里的示例数据只有 2 帧，代码本身是按“完整数据集”方式编写的。
+5. 默认会额外生成 `query/` 和 `test/`，以兼容当前 `CRTrack` 数据读取器；如果只想导出训练集，可使用 `--split-mode train_only`。
+
+示例命令：
+
+```bash
+python3 tools/prepare_crtrack_reid.py \
+  --source-root CRTrack_In-domain_gt \
+  --output-root data/CRTrack-ReID \
+  --split-mode train_query_gallery \
+  --overwrite
+```
+
+输出内容包括：
+
+- `data/CRTrack-ReID/train/*.jpg`
+- `data/CRTrack-ReID/query/*.jpg`
+- `data/CRTrack-ReID/test/*.jpg`
+- `data/CRTrack-ReID/metadata.csv`
+- `data/CRTrack-ReID/summary.json`
+
+其中裁剪图文件名格式为：
+
+```text
+{pid:06d}_c{camid}_{scene}_{clip}_f{frame_id:06d}_lid{local_id:04d}.jpg
+```
+
+这与 `train/data/datasets/CRTrack.py` 中使用的 `([\-\d]+)_c(\d*)` 解析规则兼容。

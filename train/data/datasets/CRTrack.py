@@ -1,35 +1,21 @@
 # encoding: utf-8
-"""
-@author:  sherlock
-@contact: sherlockliao01@gmail.com
-"""
+"""CRTrack ReID dataset loader."""
 
 import glob
-import re
-
 import os.path as osp
+import re
 
 from .bases import BaseImageDataset
 
 
-class AIC(BaseImageDataset):
-    """
-    Market1501
-    Reference:
-    Zheng et al. Scalable Person Re-identification: A Benchmark. ICCV 2015.
-    URL: http://www.liangzheng.org/Project/project_reid.html
+class CRTrack(BaseImageDataset):
+    """CRTrack person re-identification dataset in the standalone ReID folder layout."""
 
-    Dataset statistics:
-    # identities: 776 (+1 for background)
-    # images: 37778 (train) + 1578 (query) + 11579 (gallery)
-    """
-    dataset_dir = 'AIC'
+    dataset_dir = 'data/CRTrack-ReID'
 
-    def __init__(self, root='.', verbose=True, **kwargs):
-        super(AIC, self).__init__()
+    def __init__(self, root='..', verbose=True, **kwargs):
+        super(CRTrack, self).__init__()
         self.dataset_dir = osp.join(root, self.dataset_dir)
-        
-
         self.train_dir = osp.join(self.dataset_dir, 'train')
         self.query_dir = osp.join(self.dataset_dir, 'query')
         self.gallery_dir = osp.join(self.dataset_dir, 'test')
@@ -41,7 +27,7 @@ class AIC(BaseImageDataset):
         gallery = self._process_dir(self.gallery_dir, relabel=False)
 
         if verbose:
-            print("=> AIC loaded")
+            print('=> CRTrack loaded')
             self.print_dataset_statistics(train, query, gallery)
 
         self.train = train
@@ -53,7 +39,6 @@ class AIC(BaseImageDataset):
         self.num_gallery_pids, self.num_gallery_imgs, self.num_gallery_cams, self.num_gallery_tids = self.get_imagedata_info(self.gallery)
 
     def _check_before_run(self):
-        """Check if all files are available before going deeper"""
         if not osp.exists(self.dataset_dir):
             raise RuntimeError("'{}' is not available".format(self.dataset_dir))
         if not osp.exists(self.train_dir):
@@ -65,13 +50,14 @@ class AIC(BaseImageDataset):
 
     def _process_dir(self, dir_path, relabel=False):
         img_paths = glob.glob(osp.join(dir_path, '*.jpg'))
-        pattern = re.compile(r'([-\d]+)_c(\d*)')
+        pattern = re.compile(r'([\-\d]+)_c(\d*)')
 
         pid_container = set()
         tid_container = set()
         for img_path in img_paths:
             pid, camid = map(int, pattern.search(img_path).groups())
-            if pid == -1: continue  # junk images are just ignored
+            if pid == -1:
+                continue
             pid_container.add(pid)
             tid_container.add((pid, camid))
         pid2label = {pid: label for label, pid in enumerate(pid_container)}
@@ -80,12 +66,12 @@ class AIC(BaseImageDataset):
         dataset = []
         for img_path in img_paths:
             pid, camid = map(int, pattern.search(img_path).groups())
-            
             tid = int(tid2label[(pid, camid)])
-            if pid == -1: continue  # junk images are just ignored
-            camid -= 1  # index starts from 0
-            if relabel: 
-                pid = pid2label[pid]                
+            if pid == -1:
+                continue
+            camid -= 1
+            if relabel:
+                pid = pid2label[pid]
             dataset.append((img_path, pid, camid, tid))
 
         return dataset

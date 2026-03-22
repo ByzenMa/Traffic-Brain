@@ -1,40 +1,32 @@
 MODEL:
   PRETRAIN_CHOICE: 'imagenet'
-  PRETRAIN_PATH: '/mnt/lustre/hezhiqun/.torch/models/resnet50-19c8e357.pth'
-  # PRETRAIN_PATH: '/mnt/lustre/hezhiqun/.torch/models/resnet101-5d3b4d8f.pth'
-  # PRETRAIN_PATH: '/mnt/lustre/hezhiqun/.torch/models/se_resnext50_32x4d-a260b3a4.pth'
+  PRETRAIN_PATH: '/home/haoluo/.torch/models/resnet50-19c8e357.pth'
+  LAST_STRIDE: 2
+  NECK: 'no'
   METRIC_LOSS_TYPE: 'triplet'
-  IF_LABELSMOOTH: 'on'
+  IF_LABELSMOOTH: 'off'
   IF_WITH_CENTER: 'no'
 
 
 INPUT:
-  # SIZE_TRAIN: [320, 320]
-  # SIZE_TEST: [320, 320]
-  SIZE_TRAIN: [256, 256]
-  SIZE_TEST: [256, 256]
+  SIZE_TRAIN: [256, 128]
+  SIZE_TEST: [256, 128]
   PROB: 0.5 # random horizontal flip
-  RE_PROB: 0.5 # random erasing
+  RE_PROB: 0.0 # random erasing
   PADDING: 10
 
 DATASETS:
-  NAMES: ('market1501')
+  NAMES: ('CRTrack')
 
 DATALOADER:
   SAMPLER: 'softmax_triplet'
-  NUM_INSTANCE: 8
+  NUM_INSTANCE: 4
   NUM_WORKERS: 8
-  NUM_CAMERAS: 4
 
 SOLVER:
   OPTIMIZER_NAME: 'Adam'
   MAX_EPOCHS: 120
-  # BASE_LR: 0.00005
-  BASE_LR: 0.00010
-  # BASE_LR: 0.00035 
-
-  TRACK_MARGIN: 0.1
-  TRACK_WEIGHT: 0.
+  BASE_LR: 0.00035
 
   CLUSTER_MARGIN: 0.3
 
@@ -50,18 +42,18 @@ SOLVER:
   BIAS_LR_FACTOR: 1
   WEIGHT_DECAY: 0.0005
   WEIGHT_DECAY_BIAS: 0.0005
-  IMS_PER_BATCH: 128
+  IMS_PER_BATCH: 64
 
   STEPS: [40, 70]
   GAMMA: 0.1
 
   WARMUP_FACTOR: 0.01
-  WARMUP_ITERS: 10
+  WARMUP_ITERS: 0
   WARMUP_METHOD: 'linear'
 
-  CHECKPOINT_PERIOD: 20
+  CHECKPOINT_PERIOD: 40
   LOG_PERIOD: 20
-  EVAL_PERIOD: 20
+  EVAL_PERIOD: 40
 
 TEST:
   IMS_PER_BATCH: 128
@@ -70,6 +62,6 @@ TEST:
   NECK_FEAT: 'after'
   FEAT_NORM: 'yes'
 
-OUTPUT_DIR: "output"
+OUTPUT_DIR: "../outputs/crtrack_baseline"
 
 

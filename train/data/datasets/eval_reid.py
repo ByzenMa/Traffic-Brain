@@ -8,8 +8,8 @@ import numpy as np
 import pytrec_eval
 
 def eval_func(distmat, q_pids, g_pids, q_camids, g_camids, max_rank=100):
-    """Evaluation with market1501 metric
-        Key: for each query identity, its gallery images from the same camera view are discarded.
+    """Evaluation for image re-identification.
+        Key: for each query identity, gallery images from the same camera view are discarded.
         """
     num_q, num_g = distmat.shape
     if num_g < max_rank:
