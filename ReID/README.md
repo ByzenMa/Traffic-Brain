@@ -1,10 +1,10 @@
 # ReID
 
-独立的 CRTrack 行人重识别项目代码，基于当前仓库中的 ReID baseline 训练框架整理而成。
+独立的 CRTrack 行人重识别项目代码，仅保留 CRTrack 数据集相关训练与转换能力。
 
 ## 项目目标
 
-- 项目目录名固定为 `ReID/`，与原来的 `AI-City-Vehicle-Reid/` 解耦。
+- 项目目录名固定为 `ReID/`。
 - 训练数据统一使用 `CRTrack_In-domain_gt` 转换后的 ReID 数据集。
 - 身份标签只从 `ids_with_text_cross_view_selected` 中读取。
 - 转换脚本按完整 `scene/clip/view` 层级遍历，既能处理当前示例 2 帧数据，也能处理假设的完整数据集。
@@ -46,7 +46,7 @@ cd ReID/train
 sh run.sh
 ```
 
-默认训练配置已经切换为 `CRTrack` 数据集，并且数据根目录默认为项目上一级的 `ReID/` 根目录。
+默认训练配置已经切换为 `CRTrack`，并且项目内已去除其他数据集相关注册与入口代码。
 
 ## 3. 关键约定
 

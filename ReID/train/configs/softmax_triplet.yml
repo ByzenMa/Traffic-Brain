@@ -18,7 +18,7 @@ INPUT:
   PADDING: 10
 
 DATASETS:
-  NAMES: ('market1501')
+  NAMES: ('CRTrack')
 
 DATALOADER:
   SAMPLER: 'softmax_triplet'
