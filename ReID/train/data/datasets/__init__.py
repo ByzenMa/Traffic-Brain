@@ -8,6 +8,7 @@ from .dukemtmcreid import DukeMTMCreID
 from .market1501 import Market1501
 from .VeRi import VeRi
 from .AIC import AIC
+from .CRTrack import CRTrack
 from .VehicleID import VehicleID
 from .msmt17 import MSMT17
 from .dataset_loader import ImageDataset
@@ -17,9 +18,10 @@ __factory = {
     'cuhk03': CUHK03,
     'dukemtmc': DukeMTMCreID,
     'msmt17': MSMT17,
-   	'VeRi': VeRi,
-   	'AIC': AIC,
-    'VehicleID': VehicleID
+    'VeRi': VeRi,
+    'AIC': AIC,
+    'CRTrack': CRTrack,
+    'VehicleID': VehicleID,
 }
 
 
