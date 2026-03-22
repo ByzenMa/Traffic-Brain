@@ -1,0 +1,13 @@
+A man in a black coat and black trousers, carrying a white handbag.: 13
+A man in a gray coat and black trousers, carrying a white handbag.: 16
+A man in a gray coat, black trousers and black shoes, carrying a white plastic bag.: 17
+A man in a green coat and gray trousers, carrying a white plastic bag.: 21
+A man wearing a black coat, black trousers and black shoes.: 18,20,22
+A man wearing a black coat, black trousers and white shoes.: 15
+A man wearing a black coat, gray trousers and black shoes.: 4
+A man wearing a gray coat, black trousers and white shoes.: 19
+A man wearing a pink coat.: 10
+A man wearing a red coat.: 9
+A man wearing a white coat, black trousers and white shoes.: 2
+A man wearing a yellow coat, black trousers and white shoes.: 11
+A man wearing an orange coat, gray trousers and white shoes.: 14
