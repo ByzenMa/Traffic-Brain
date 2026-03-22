@@ -10,7 +10,7 @@ INPUT:
   PADDING: 10
 
 DATASETS:
-  NAMES: ('market1501')
+  NAMES: ('CRTrack')
 
 DATALOADER:
   SAMPLER: 'softmax'
@@ -39,6 +39,6 @@ SOLVER:
 TEST:
   IMS_PER_BATCH: 128
 
-OUTPUT_DIR: "/home/haoluo/log/reid/market1501/softmax_bs64_256x128"
+OUTPUT_DIR: "../outputs/crtrack_softmax"
 
 
