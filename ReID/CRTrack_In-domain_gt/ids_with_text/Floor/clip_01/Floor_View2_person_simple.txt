@@ -1,0 +1,16 @@
+1: A man wearing a black coat and black trousers.
+2: A man wearing a white coat, black trousers and white shoes.
+4: A man wearing a black coat, gray trousers and black shoes.
+5: A man wearing a white coat, black trousers and black shoes.
+9: A man wearing a red coat.
+10: A man wearing a pink coat.
+11: A man wearing a yellow coat, black trousers and white shoes.
+13: A man in a black coat and black trousers, carrying a white handbag.
+14: A man wearing an orange coat, gray trousers and white shoes.
+15: A man wearing a black coat, black trousers and white shoes.
+16: A man in a gray coat and black trousers, carrying a white handbag.
+17: A man in a gray coat, black trousers and black shoes, carrying a white plastic bag.
+18: A man wearing a black coat, black trousers and black shoes.
+19: A man wearing a gray coat, black trousers and white shoes.
+20: A man wearing a black coat, black trousers and black shoes.
+22: A man wearing a black coat, black trousers and black shoes.
