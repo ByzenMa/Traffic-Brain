@@ -44,6 +44,17 @@ _C.MODEL.METRIC_LOSS_TYPE = 'triplet'
 # If train with label smooth, options: 'on', 'off'
 _C.MODEL.IF_LABELSMOOTH = 'on'
 
+# Optional enhancement modules. All disabled keeps the untouched original Baseline path.
+_C.MODEL.MODULES = CN()
+_C.MODEL.MODULES.USE_MSF = False
+_C.MODEL.MODULES.USE_RSCAMA = False
+_C.MODEL.MODULES.USE_TFF = False
+_C.MODEL.MODULES.USE_SFF = False
+_C.MODEL.MODULES.RSCAMA_NUM_LAYERS = 1
+_C.MODEL.MODULES.RSCAMA_STATE_SIZE = 16
+_C.MODEL.MODULES.RSCAMA_INTERMEDIATE_SIZE = 256
+_C.MODEL.MODULES.RSCAMA_CONV_KERNEL = 4
+
 
 # -----------------------------------------------------------------------------
 # INPUT
